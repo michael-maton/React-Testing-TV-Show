@@ -15,11 +15,31 @@ export default function App() {
   const [selectedSeason, setSelectedSeason] = useState("");
   const episodes = seasons[selectedSeason] || [];
 
-  useEffect(() => {
-    fetchShow().then((res) => {
-      setShow(res.data);
-      setSeasons(formatSeasons(res.data._embedded.episodes));
-    });
+  useEffect(  () => {
+     fetchShow()
+      .then((res) => {
+        setShow(res.data);
+        setSeasons(formatSeasons(res.data._embedded.episodes));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // async function fetchData() {
+    //   const res = await fetchShow();
+    //   console.log("res: ", res);
+    //   await setShow(res.data);
+    //   await setSeasons(formatSeasons(res.data._embedded.episodes));
+    // }
+    // fetchData();
+
+
+
+    // const res = await fetchShow();
+    // console.log("res: ", res)
+    // await setShow(res.data);
+    // await setSeasons(formatSeasons(res.data._embedded.episodes));
+
   }, []);
 
   const handleSelect = (e) => {
@@ -30,7 +50,7 @@ export default function App() {
     return <h2>Fetching data...</h2>;
   }
   // console.log("selected season: ", selectedSeason);
-  console.log(episodes);
+  // console.log(episodes);
   return (
     <div className="App">
       <img className="poster-img" src={show.image.original} alt={show.name} />
