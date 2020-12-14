@@ -29,7 +29,8 @@ export default function App() {
   if (!show) {
     return <h2>Fetching data...</h2>;
   }
-
+  // console.log("selected season: ", selectedSeason);
+  console.log(episodes);
   return (
     <div className="App">
       <img className="poster-img" src={show.image.original} alt={show.name} />
